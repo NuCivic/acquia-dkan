@@ -22,9 +22,8 @@ before_script:
   # Install DKAN
   - wget http://dkan-acquia.nuamsdev.com/dkan-acquia.tar.gz
   - tar -zxf dkan-acquia.tar.gz
-  - cd webroot/test
+  - cd webroot/profiles/dkan/test
   - composer install
-  - cd ..
   - drush si dkan --sites-subdir=default --db-url=mysql://root:@127.0.0.1/dkan_travis --account-name=admin --account-pass=admin  --site-name="DKAN" install_configure_form.update_status_module='array(FALSE,FALSE)' --yes
   - drush cc all --yes
   - drush --quiet --yes --root=$PWD --server=builtin runserver :8888 > /dev/null 2>&1 &
