@@ -14,10 +14,7 @@ before_script:
   - tar -zxf dkan-acquia.tar.gz
   - cd webroot
   - drush make --prepare-install webroot/build-dkan.make --yes dkan
-  - cd dkan
-
-install:
-  - cd test
+  - cd dkan/test
   - composer install
   - mysql -e 'create database dkan_travis;'
   - sudo apt-get update > /dev/null
