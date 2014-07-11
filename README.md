@@ -1,4 +1,4 @@
 Test Repo for Acquia builds
 =================
 
-[![Build Status](https://travis-ci.org/NuCivic/acquia-dkan-teset.svg)](https://travis-ci.org/NuCivic/acquia-dkan-teset)
+[![Build Status](https://travis-ci.org/NuCivic/acquia-dkan-test.svg)](https://travis-ci.org/NuCivic/acquia-dkan-test)
