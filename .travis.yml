@@ -19,7 +19,7 @@ install:
   - composer global require --no-interaction youngj/httpserver:*
 
 before_script:
-  - export WD='dkan'
+  - export WD='drupal'
   - cd ..
   - cp -r $TRAVIS_BUILD_DIR/docroot/profiles/dkan/test test
   - cd test
