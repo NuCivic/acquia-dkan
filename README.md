@@ -23,7 +23,7 @@ $ rm -rf docroot/sites/all
 $ ln -s ../../projects docroot/sites/all
 ```
 
-Add this repo as a remote and merge changes
+Add this repo as a remote to merge changes
 
 ```bash
 $ git remote add dkan-updates https://github.com/NuCivic/acquia-dkan.git
