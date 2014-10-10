@@ -6,7 +6,6 @@ DKAN on Acquia
 
 ## Prepare your repo
 
-On 
 Save your settings file
 
 ```bash
