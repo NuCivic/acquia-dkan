@@ -1,0 +1,1 @@
+Simlink target for sites/all folder

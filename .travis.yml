@@ -12,46 +12,36 @@ install:
   - mysql -e 'create database dkan_travis;'
   - sudo apt-get update > /dev/null
   - sudo apt-get --quiet=2 install php5-cgi php5-curl php5-gd php5-mysql > /dev/null
-  
-  # Install latest Drush 6.
+
+  # Install latest Drush 7.
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - composer global require --no-interaction drush/drush:6.*
+  - composer global require --no-interaction drush/drush:dev-master
+  - drush dl registry_rebuild
 
 before_script:
-  # Install DKAN
-  - wget http://dkan-acquia.nuamsdev.com/dkan-acquia.tar.gz
-  - tar -zxf dkan-acquia.tar.gz
-  - cp -r webroot/profiles/dkan/test test
-  - mv webroot test/drupal
+  - export WD='drupal'
+  - cd ..
+  - cp -r $TRAVIS_BUILD_DIR/docroot/profiles/dkan/test test
   - cd test
+  - cp -R $TRAVIS_BUILD_DIR/docroot $WD
+  - rm $WD/sites/default/settings.php
+  - rm $WD/sites/all
+  - cp -R $TRAVIS_BUILD_DIR/projects $WD/sites/all
   - composer install
-  - cd drupal
+  - cd $WD
   - drush si dkan --sites-subdir=default --db-url=mysql://root:@127.0.0.1/dkan_travis --account-name=admin --account-pass=admin  --site-name="DKAN" install_configure_form.update_status_module='array(FALSE,FALSE)' --yes
+  - drush rr
+  - drush php-eval 'node_access_rebuild();'
   - drush cc all --yes
-  - drush --quiet --yes --root=$PWD --server=builtin runserver :8888 > /dev/null 2>&1 &
+  - drush --quiet --yes --root=$PWD runserver :8888 > /dev/null 2>&1 &
   - sleep 4s
-
-  # Setup display for selenium
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - sleep 3
-  - cd ../
-
-  - wget http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.2.jar
-  - java -jar selenium-server-standalone-2.42.2.jar -quiet -p 4444 -log shut_up_selenium &
-  - sleep 5
+  - drush -y en simpletest
 
 script:
-  - bin/behat features/groups.feature
-  - bin/behat features/dataset.feature
-  - bin/behat features/datastore.feature
-  - bin/behat features/editor.feature
-  - bin/behat features/home.feature
-  - bin/behat features/search.feature
-  - bin/behat features/recline.feature
+  - drush test-run --uri=http://127.0.0.1:8080
 
 notifications:
   slack:
     rooms:
-      nuams:2Eywq0BtPv73ISq3CF6gvRzo#monitor-devops
-      nuams:t3p2KxXdzymmwxitWPvfAsnK#monitor-dkan
+      - nucivic:t3p2KxXdzymmwxitWPvfAsnK#monitor-devops
+      - nucivic:t3p2KxXdzymmwxitWPvfAsnK#monitor-dkan

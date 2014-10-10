@@ -1,0 +1,1 @@
+../../../assets/settings.php
