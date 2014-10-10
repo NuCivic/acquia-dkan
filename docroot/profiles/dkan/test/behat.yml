@@ -10,7 +10,7 @@ default:
     Drupal\DrupalExtension\Extension:
       blackbox: ~
       drush:
-        root: "drupal" 
+        root: "dkan" 
       region_map:
         content: "#region-content"
         toolbar: ".tabs--primary"
