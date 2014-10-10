@@ -17,6 +17,7 @@ install:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - composer global require --no-interaction drush/drush:dev-master
   - composer global require --no-interaction youngj/httpserver:*
+  - drush dl registry_rebuild
 
 before_script:
   - export WD='drupal'
@@ -30,6 +31,8 @@ before_script:
   - composer install
   - cd $WD
   - drush si dkan --sites-subdir=default --db-url=mysql://root:@127.0.0.1/dkan_travis --account-name=admin --account-pass=admin  --site-name="DKAN" install_configure_form.update_status_module='array(FALSE,FALSE)' --yes
+  - drush rr
+  - drush php-eval 'node_access_rebuild();'
   - drush cc all --yes
   - drush --quiet --yes --root=$PWD runserver :8888 > /dev/null 2>&1 &
   - sleep 4s
