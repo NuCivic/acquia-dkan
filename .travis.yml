@@ -35,6 +35,10 @@ before_script:
   - drush cc all --yes
   - drush --quiet --yes --root=$PWD runserver :8888 > /dev/null 2>&1 &
   - sleep 4s
+  - drush -y en simpletest
+
+script:
+  - drush test-run --uri=http://127.0.0.1:8080
 
 notifications:
   slack:
