@@ -2,7 +2,7 @@ DKAN on Acquia
 ==============
 
 [![Build Status](https://travis-ci.org/NuCivic/acquia-dkan.svg)](https://travis-ci.org/NuCivic/acquia-dkan)
-7.x-1.4
+7.x-1.7
 
 ## Prepare your repo
 
