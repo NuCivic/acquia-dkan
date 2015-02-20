@@ -4,7 +4,7 @@ api = 2
 libraries[recline][type] = libraries
 libraries[recline][download][type] = git
 libraries[recline][download][url] = "https://github.com/okfn/recline.git"
-libraries[recline][download][revision] = "7757e563ee180e136a8a4008b6ac7b7b56e3050f"
+libraries[recline][download][revision] = "abbab59ce581740ae4d2e7619a2503e5c55f49a9"
 
 libraries[deep_diff][type] = libraries
 libraries[deep_diff][download][type] = git
@@ -16,4 +16,10 @@ libraries[recline_deeplink][type] = libraries
 libraries[recline_deeplink][download][type] = git
 libraries[recline_deeplink][download][url] = "https://github.com/NuCivic/recline-deeplink.git"
 libraries[recline_deeplink][directory_name] = recline_deeplink
-libraries[recline_deeplink][download][revision] = "4fcf3c49ca37d436ab03e767764ff48184034c45"
+libraries[recline_deeplink][download][revision] = "c1695d669f8314ed8b66e5907eb4f1bc4a8a9495"
+
+libraries[leaflet_markercluster][type] = libraries
+libraries[leaflet_markercluster][download][type] = git
+libraries[leaflet_markercluster][download][url] = "https://github.com/Leaflet/Leaflet.markercluster.git"
+libraries[leaflet_markercluster][directory_name] = leaflet_markercluster
+libraries[leaflet_markercluster][download][revision] = "c5864dbfca9e71c86ac61b432862cc77f8fd8e68"
