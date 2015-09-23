@@ -57,7 +57,7 @@ function colorizer_admin_form($show_files = TRUE, $show_submit = TRUE) {
     );
   }
 
-  $file = variable_get('colorizer_' . $instance . '_stylesheet', '');
+  $file = colorizer_load($instance, 'stylesheet');
   if (!empty($file)) {
     $form['colorizer_reset'] = array(
       '#type' => 'checkbox',
@@ -72,7 +72,7 @@ function colorizer_admin_form($show_files = TRUE, $show_submit = TRUE) {
   );
 
   $preview_file = drupal_get_path('theme', $theme) . '/' . $preview_file;
-  if (file_exists($preview_file)) {
+  if (is_file($preview_file)) {
     $preview_data = file_get_contents($preview_file);
     $form['colorizer_colors']['preview'] = array(
       '#markup' => $preview_data,
@@ -97,7 +97,7 @@ function colorizer_admin_form($show_files = TRUE, $show_submit = TRUE) {
 
     // See if we're using a predefined scheme.
     // Note: we use the original theme when the default scheme is chosen.
-    $current_scheme = variable_get('colorizer_' . $instance . '_palette', array());
+    $current_scheme = colorizer_load($instance, 'palette');
     foreach ($schemes as $key => $scheme) {
       if ($current_scheme == $scheme) {
         $scheme_name = $key;
@@ -192,16 +192,22 @@ function colorizer_admin_form($show_files = TRUE, $show_submit = TRUE) {
     $form['actions'] = array(
       '#type' => 'actions',
     );
-    $form['actions']['submit'] = array(
+    if (!$show_files) {
+      // only show regular Save button when not on the global config page
+      $form['actions']['submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Save configuration'),
+      );
+    }
+    $form['actions']['save_default'] = array(
       '#type' => 'submit',
-      '#value' => t('Save configuration'),
+      '#value' => t('Save as default'),
     );
     $form['actions']['colorizer_clearcache'] = array(
       '#type' => 'submit',
       '#value' => t('Clear Colorizer Cache'),
     );
   }
-
   return $form;
 }
 
@@ -241,6 +247,8 @@ function colorizer_admin_settings_validate($form, &$form_state) {
  * Mostly copied from Color module
  */
 function colorizer_admin_form_submit($form, &$form_state) {
+  global $theme_key;
+
   // Save the file locations
   if (!empty($form_state['values']['op']) && ($form_state['values']['op'] == $form_state['values']['colorizer_clearcache'])) {
     // clear the colorizer css cache
@@ -252,17 +260,14 @@ function colorizer_admin_form_submit($form, &$form_state) {
     variable_set('colorizer_previewfile', $form_state['values']['colorizer_previewfile']);
   }
 
+  $instance = !empty($form_state['values']['instance']) ? $form_state['values']['instance'] : '';
+  if (!empty($form_state['values']['op']) && ($form_state['values']['op'] == $form_state['values']['save_default'])) {
+    // save as default instance
+    $instance = $theme_key;
+  }
+
   if (!empty($form_state['values']['colorizer_reset'])) {
-    $instance = $form_state['values']['instance'];
-    variable_del('colorizer_' . $instance . '_palette');
-    // Delete old files.
-    foreach (variable_get('colorizer_' . $instance . '_files', array()) as $file) {
-      @drupal_unlink($file);
-    }
-    if (isset($file) && $file = dirname($file)) {
-      @drupal_rmdir($file);
-    }
-    variable_del('colorizer_' . $instance . '_files');
+    colorizer_delete($instance);
     return;
   }
 
@@ -272,7 +277,6 @@ function colorizer_admin_form_submit($form, &$form_state) {
     return;
   }
   $theme = $form_state['values']['theme'];
-  $instance = $form_state['values']['instance'];
   $info = $form_state['values']['info'];
 
   // Resolve palette.
@@ -286,7 +290,7 @@ function colorizer_admin_form_submit($form, &$form_state) {
     $palette += $info['schemes']['default']['colors'];
   }
 
-  variable_set('colorizer_' . $instance . '_palette', $palette);
+  colorizer_save($instance, array('palette' => $palette));
 
   colorizer_update_stylesheet($theme, $instance, $palette);
 }
