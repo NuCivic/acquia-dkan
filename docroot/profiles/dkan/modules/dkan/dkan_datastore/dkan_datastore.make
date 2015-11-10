@@ -3,10 +3,10 @@ api = 2
 
 projects[feeds][download][type] = "git"
 projects[feeds][download][url] = "http://git.drupal.org/project/feeds.git"
-projects[feeds][download][revision] = 1383713
+projects[feeds][download][revision] = 453dddfa5d8b2bc8c5961466490aa385f57655b2
 projects[feeds][download][branch] = 7.x-2.x
 projects[feeds][patch][1428272] = http://drupal.org/files/feeds-encoding_support_CSV-1428272-52.patch
-projects[feeds][patch][1127696] = http://drupal.org/files/feeds-1127696-multiple-importers-per-content-type-59.patch
+projects[feeds][patch][1127696] = http://drupal.org/files/issues/1127696-97.patch
 projects[feeds][subdir] = contrib
 projects[feeds][type] = module
 
@@ -26,7 +26,7 @@ projects[schema][subdir] = contrib
 projects[schema][download][revision] = "08b02458694d186f8ab3bd0b24fbc738f9271108"
 
 projects[services][subdir] = contrib
-projects[services][version] = 3.11
+projects[services][version] = 3.12  
 
 projects[data][subdir] = contrib
 projects[data][version] = 1.x

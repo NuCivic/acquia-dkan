@@ -1,5 +1,3 @@
-[![DKAN Sitewide Build Status](https://travis-ci.org/NuCivic/dkan.svg?branch=7.x-1.x)](https://travis-ci.org/NuCivic/dkan)
-
 
 [![DKAN](http://f.cl.ly/items/3q3v120q0h1q2d2A3s3L/Screenshot%202014-04-29%2018.40.15.png)](http://nucivic.com/dkan)
 
@@ -19,9 +17,8 @@
 
 ## Hosting and support
 
-NuCivic' [Data](http://nucivic.com/data/enterprise/) platform offers 24/7, secure, cloud-based DKAN hosting and support services.
+NuCivic' [Data](http://nucivic.com/data/) platform offers 24/7, secure, cloud-based DKAN hosting and support services.
 
-*   [ FAQs »](http://nucivic.com/data/faqs/)
 *   [ Live demo » ](http://demo.getdkan.com/)
 *   [ Docs » ](http://docs.getdkan.com/)
 
@@ -29,9 +26,10 @@ NuCivic' [Data](http://nucivic.com/data/enterprise/) platform offers 24/7, secur
 
 | Component      | Status      |
 |----------------|:------------|
-| DKAN Sitewide  | [![DKAN Sitewide Build Status](https://travis-ci.org/NuCivic/dkan.svg?branch=7.x-1.x)](https://travis-ci.org/NuCivic/dkan) |
+| DKAN Sitewide  | [![DKAN Sitewide Build Status](https://circleci.com/gh/NuCivic/dkan.svg?style=svg)](https://circleci.com/gh/NuCivic/dkan) |
 | DKAN Dataset   | [![DKAN Dataset Build Status](https://travis-ci.org/NuCivic/dkan_dataset.svg?branch=7.x-1.x)](https://travis-ci.org/NuCivic/dkan_dataset) |
 | DKAN Datastore | [![DKAN Datastore Build Status](https://travis-ci.org/NuCivic/dkan_datastore.svg?branch=7.x-1.x)](https://travis-ci.org/NuCivic/dkan_datastore) |
+| Open Data Schema Map | [![ODSM Build Status](https://travis-ci.org/NuCivic/open_data_schema_map.svg?branch=master)](https://travis-ci.org/NuCivic/open_data_schema_map) |
 
 ## Installation
 
@@ -81,6 +79,14 @@ Contact us if you want to get involved!
 
 DKAN development is a sponsored by NuCivic. For more information about hosting and professional support options for DKAN, see http://nucivic.com/data
 
+### Releases and Release Candidates
+
+Currently, we plan releases wrapping github issues on milestones. For instance, if the latest release for dkan is ```7.x-1.n``` then a ```DKAN 7.x-1.n+1``` milestone should exists. You are welcome to take a look and propose bugs fixes or new features for the next release.
+
+However, there are times when we need to create a release candidate for the next release. This usually happens when security updates are needed for contrib modules but other criteria may arise.
+
+We keep DKAN, DKAN Dataset and DKAN Datastore versioning in sync.
+
 ## Getting Help with DKAN
 
 Have a question, found a bug, or need help with DKAN?
@@ -95,7 +101,7 @@ Please post it to our Github issue queue: https://github.com/nucivic/dkan/issues
 
 ### I would like to purchase DKAN support or hosting
 
-Please contact us at NuCivic http://nucivic.com/data/demo/
+Please contact us at NuCivic http://nucivic.com/contact
 
 ## Community
 
@@ -105,6 +111,8 @@ https://groups.google.com/forum/?hl=en#!forum/dkan-dev
 ## Contributing
 
 Please file all tickets for DKAN, including those that involve code in DKAN Dataset and DKAN Datastore modules in this issue queue. We have several labels in place for you to tag the issue with and identify it with the proper component.
+
+Please follow the (Ticket Template)[https://github.com/NuCivic/dkan/blob/7.x-1.x/CONTRIBUTING.md#new-feature-template] when creating new tickets.
 
 Also, please remember to reference the issue across repositories in order for maintainers to pick up commits and pull requests looking at the issue. You can do that for commits like this:
 

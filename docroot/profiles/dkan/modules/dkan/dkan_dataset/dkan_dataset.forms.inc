@@ -62,7 +62,7 @@ function dkan_dataset_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form_id == 'dataset_node_form') {
 
-    $form['#attached']['css'][] = drupal_get_path('module', 'dkan_dataset') . '/dkan_dataset.css';
+    $form['#attached']['css'][] = drupal_get_path('module', 'dkan_dataset') . '/css/dkan_dataset.css';
     $form['#attached']['js'][] = drupal_get_path('module', 'dkan_dataset') . '/js/dkan_forms.js';
     beautytips_add_beautytips();
 
@@ -187,7 +187,7 @@ function dkan_dataset_form_alter(&$form, &$form_state, $form_id) {
   }
   if ($form_id == 'resource_node_form') {
     drupal_add_library('system', 'jquery.bbq');
-    $form['#attached']['css'][] = drupal_get_path('module', 'dkan_dataset') . '/dkan_dataset.css';
+    $form['#attached']['css'][] = drupal_get_path('module', 'dkan_dataset') . '/css/dkan_dataset.css';
     $form['#attached']['js'][] = drupal_get_path('module', 'dkan_dataset') . '/js/dkan_forms.js';
 
     if (isset($form['feeds'])) {
@@ -199,6 +199,11 @@ function dkan_dataset_form_alter(&$form, &$form_state, $form_id) {
     // Get langcode for field_dataset_ref.
     $field_dataset_ref_langcode = dkan_dataset_form_field_language($form, 'field_dataset_ref');
     $form['field_dataset_ref'][$field_dataset_ref_langcode]['#description'] = t('Dataset that this resource is attached to.');
+    $dataset_options = $form['field_dataset_ref'][$field_dataset_ref_langcode]['#options'];
+    $fix_apostrophes = function($value) {
+      return html_entity_decode($value, ENT_QUOTES, "UTF-8");
+    };
+    $form['field_dataset_ref'][$field_dataset_ref_langcode]['#options'] = array_map($fix_apostrophes, $dataset_options);
 
     // Get langcode for field_upload.
     $field_upload_langcode = dkan_dataset_form_field_language($form, 'field_upload');
