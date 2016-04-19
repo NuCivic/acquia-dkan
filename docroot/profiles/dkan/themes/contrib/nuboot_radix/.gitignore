@@ -1,1 +1,7 @@
-.sass-cache
+# Ignore SASS files
+/.sass-cache
+.DS_Store
+/extensions/compass_radix
+bower_components*
+node_modules*
+npm-debug.log
