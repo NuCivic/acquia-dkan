@@ -1,3 +1,5 @@
+**NOTE:** This repository is deprecated, as its entire raison d'etre is now provided by _DKAN Starter_. See the DKAN Starter [repository](https://github.com/NuCivic/dkan_starter) and [documentation](https://dkan-starter.readthedocs.io/en/latest/) for more information.
+
 DKAN on Acquia
 ==============
 
